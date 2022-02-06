@@ -6,8 +6,12 @@ import Paper from "@material-ui/core/Paper";
 import Popper from "@material-ui/core/Popper";
 import MenuList from "@material-ui/core/MenuList";
 import { makeStyles } from "@material-ui/core/styles";
-import { BiCategoryAlt } from "react-icons/bi";
+import { FaThList } from "react-icons/fa";
 import CategoryTab from "./CategoryTab";
+
+import styled from "styled-components";
+
+const Root = styled.div``;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,42 +20,32 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     marginRight: theme.spacing(2),
   },
+  blogIcon: {
+    marginRight: "0.3rem",
+    fontSize: "0.8rem",
+    marginTop: "-0.1rem",
+  },
 
   manuItem: {
-    borderBottom: "1px solid #858796",
-    // marginTop: "-1rem",
+    // borderBottom: "1px solid #858796",
   },
   notificationButton: {
-    backgroundColor: "transparent",
-    color: "#fff",
+    height: "1.8rem",
+    color: "#595c97",
+    "&:hover": {
+      color: "#fff",
+      background: "linear-gradient(105.6deg, #7db6e7 37.65%, #1ad697 83.5%)",
+    },
+  },
+  active: {
+    color: "white",
+    background: "linear-gradient(105.6deg, #7db6e7 37.65%, #1ad697 83.5%)",
   },
 
-  title: {
-    backgroundColor: "#e6e6ff",
-    borderRadius: "4px 4px 0px 0px",
-
-    borderBottom: "solid 1px #e3e6f0",
-
-    // border: "2px solid #4e73df",
-    color: "#33CC32",
-    display: "flex",
-    alignItems: "center",
-    paddingTop: "0.75rem",
-    paddingBottom: "0.75rem",
-    paddingLeft: "1rem",
-    fontSize: "0.65rem",
-    fontWeight: "700",
-  },
-
-  categoryMainDiv: {
-    // borderBottom: "1px solid #858796",
-    // "&:hover": {
-    //   backgroundColor: "#fff",
-    // },
-  },
+  categoryMainDiv: {},
 }));
 
-export default function BlogCategory() {
+export default function BlogCategory(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
@@ -86,60 +80,63 @@ export default function BlogCategory() {
   }, [open]);
 
   return (
-    <div className={classes.root}>
-      <div>
-        <Button
-          disableRipple="true"
-          ref={anchorRef}
-          aria-controls={open ? "menu-list-grow" : undefined}
-          aria-haspopup="true"
-          onClick={handleToggle}
-          style={{ backgroundColor: "transparent" }}
-          className={classes.notificationButton}
-        >
-          <BiCategoryAlt />
-          Blog
-        </Button>
+    <Root>
+      <div className={classes.root}>
+        <div>
+          <Button
+            ref={anchorRef}
+            aria-controls={open ? "menu-list-grow" : undefined}
+            aria-haspopup="true"
+            style={{ textTransform: "none" }}
+            className={classes.notificationButton}
+            className={
+              props.activeMenu == "blog" ? "active" : classes.notificationButton
+            }
+            onClick={() => {
+              props.setActiveMenu("blog");
+              handleToggle();
+            }}
+          >
+            <FaThList className={classes.blogIcon} />
+            Blog
+          </Button>
 
-        <Popper
-          open={open}
-          anchorEl={anchorRef.current}
-          role={undefined}
-          placement="bottom-start"
-          transition
-          disablePortal
-          style={{
-            width: "45%",
-            zIndex: "100",
-            // marginRight: "10%",
-            // marginTop: "-0.5rem",
-            overflow: "hidden",
-            boxShadow: "5px 5px 30px 5px rgba(0, 0, 0, 0.07)",
-            // boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
-            borderRadius: "5px",
-          }}
-        >
-          {({ TransitionProps, placement }) => (
-            <Grow
-              {...TransitionProps}
-              style={{
-                transformOrigin:
-                  placement === "bottom" ? "center top" : "center bottom",
-              }}
-            >
-              <Paper>
-                {/* <div className={classes.title}>Category</div> */}
+          <Popper
+            open={open}
+            anchorEl={anchorRef.current}
+            role={undefined}
+            placement="bottom-start"
+            transition
+            className="popper"
+            style={{
+              marginTop: "0.9rem",
+              width: "40rem",
+              boxShadow: "5px 5px 30px 5px rgba(0, 0, 0, 0.07)",
+              borderRadius: "5px",
+            }}
+          >
+            {({ TransitionProps, placement }) => (
+              <Grow
+                {...TransitionProps}
+                style={{
+                  transformOrigin:
+                    placement === "bottom" ? "center top" : "center bottom",
+                }}
+              >
+                <Paper>
+                  {/* <div className={classes.title}>Category</div> */}
 
-                <ClickAwayListener onClickAway={handleClose}>
-                  <di className={classes.categoryMainDiv}>
-                    <CategoryTab />
-                  </di>
-                </ClickAwayListener>
-              </Paper>
-            </Grow>
-          )}
-        </Popper>
+                  <ClickAwayListener onClickAway={handleClose}>
+                    <div className={classes.categoryMainDiv}>
+                      <CategoryTab />
+                    </div>
+                  </ClickAwayListener>
+                </Paper>
+              </Grow>
+            )}
+          </Popper>
+        </div>
       </div>
-    </div>
+    </Root>
   );
 }

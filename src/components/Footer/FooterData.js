@@ -3,7 +3,7 @@ import { BsFacebook } from "react-icons/bs";
 import { BsInstagram } from "react-icons/bs";
 import { BsYoutube } from "react-icons/bs";
 import { BsLinkedin } from "react-icons/bs";
-export const data = [
+export const data1 = [
   {
     logo: <BsFacebook />,
     url: "https://www.facebook.com/",

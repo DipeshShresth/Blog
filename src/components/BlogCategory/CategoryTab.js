@@ -9,23 +9,23 @@ import styled from "styled-components";
 import { data } from "./CategoryData";
 import Button from "@mui/material/Button";
 import { makeStyles } from "@mui/styles";
+import { Link } from "react-router-dom";
 
 const Root = styled.div`
   .TabMainDiv {
     display: flex;
+    // background-color: red;
   }
   .Tabs {
     // background: linear-gradient(180deg, #3f4953 0%, #121518 100%);
     height: 20rem;
-    background-color: #3c454e;
-
-    // overflow: scroll;
-    // ::-webkit-scrollbar {
-    //   width: 2px;
-    // }
+    border-radius: 5px 0px 0px 5px;
+    background-color: #506795;
+    // background: linear-gradient(105.6deg, #7db6e7 37.65%, #1ad697 83.5%);
   }
   .TabsInnerDiv {
   }
+
   .tab {
     color: #fff;
     width: 10rem;
@@ -43,13 +43,6 @@ const Root = styled.div`
     display: flex;
     flex-wrap: wrap;
   }
-  // .tabpanelInnerP {
-  //   border: 1px solid black;
-  //   // margin-right: 0.8rem;
-
-  //   border-radius: 15px;
-  //   padding: 0.1rem 0.5rem 1rem 1rem;
-  // }
 `;
 const StyledTab = styled(Tab)({
   // color: "red",
@@ -67,7 +60,7 @@ const StyledTabPanel = styled(TabPanel)({
 const useStyles = makeStyles({
   customTabs: {
     "& .Mui-selected": {
-      color: "#5cd65c",
+      color: "#49e9b4",
     },
   },
 });
@@ -127,7 +120,7 @@ export default function CategoryTab() {
             // inkBarStyle={{ color: "red" }}
             TabIndicatorProps={{
               style: {
-                backgroundColor: "#248F24",
+                backgroundColor: "#1AD697",
               },
             }}
           >
@@ -155,26 +148,31 @@ export default function CategoryTab() {
               <div className="tabPanelInnerDiv">
                 {item.subCatgory.map((subCatgory, index) => {
                   return (
-                    <Button
-                      className="Button"
-                      style={{
-                        // width: "6rem",
-                        height: "1.5rem",
-                        borderRadius: "21px",
-                        color: "#228E30",
-                        marginRight: "0.5rem",
-                        marginBottom: "0.5rem",
-                        backgroundColor: "#fff",
-                        textTransform: "none",
-                        paddingLeft: "1rem",
-                        paddingRight: "1rem",
-                        fontSize: "0.8rem",
-                        border: "1px solid #248f24",
-                      }}
-                      variant="contained"
+                    <Link
+                      to="/blog-collectionpage"
+                      style={{ textDecoration: "none" }}
                     >
-                      {subCatgory.title}
-                    </Button>
+                      <Button
+                        className="Button"
+                        style={{
+                          // width: "6rem",
+                          height: "1.5rem",
+                          borderRadius: "21px",
+                          color: "#595c97",
+                          marginRight: "0.5rem",
+                          marginBottom: "0.5rem",
+                          backgroundColor: "#fff",
+                          textTransform: "none",
+                          paddingLeft: "1rem",
+                          paddingRight: "1rem",
+                          fontSize: "0.8rem",
+                          border: "1px solid #595c97",
+                        }}
+                        variant="contained"
+                      >
+                        {subCatgory.title}
+                      </Button>
+                    </Link>
                   );
                 })}
               </div>
