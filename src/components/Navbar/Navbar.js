@@ -62,7 +62,7 @@ const Logo = styled.div`
   .pencil-log {
     font-size: 1rem;
     @media screen and (max-width: 758px) {
-      font-size: 0.9rem;
+      font-size: 1rem;
     }
   }
 `;
